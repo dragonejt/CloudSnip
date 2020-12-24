@@ -1,2 +1,2 @@
-# codesnip
-A VS Code extension for storing Code Snippets to the Cloud
+# CloudSnip
+Visual Studio Code extension for storing and sharing code snippets, all in the Cloud.
