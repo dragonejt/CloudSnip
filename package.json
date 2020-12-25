@@ -1,6 +1,6 @@
 {
 	"name": "cloudsnip",
-	"displayName": "cloudsnip",
+	"displayName": "CloudSnip",
 	"description": "Visual Studio Code extension for storing and sharing code snippets, all in the Cloud.",
 	"version": "0.0.1",
 	"engines": {
