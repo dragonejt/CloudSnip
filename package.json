@@ -14,6 +14,27 @@
 	],
 	"main": "./extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "cloudsnip",
+					"title": "CloudSnip",
+					"icon": "./lib/clipboard.svg"
+				}
+			]
+		},
+		"views": {
+			"cloudsnip": [
+				{
+					"id": "cloudsnip.auth",
+					"name": "Login"
+				},
+				{
+					"id": "cloudsnip.snips",
+					"name": "Cloud Snippets"
+				}
+			]
+		},
 		"commands": [
 			{
 				"command": "cloudsnip.helloWorld",
