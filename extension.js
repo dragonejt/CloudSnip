@@ -27,6 +27,7 @@ function activate(context) {
 			vscode.ViewColumn.One, // Editor column to show the new webview panel in.
 			{} // Webview options. More on these later.
 		  );
+		panel.webview.html = getlogincontent();
 	});
 
 	context.subscriptions.push(disposable);
@@ -39,4 +40,20 @@ function deactivate() {}
 module.exports = {
 	activate,
 	deactivate
+}
+
+function getlogincontent() {
+	return `
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Coding</title>
+</head>
+<body>
+    <button>Login with GitHub</button>
+</body>
+</html>
+	`
 }
