@@ -21,7 +21,12 @@ function activate(context) {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from CloudSnip!');
+		const panel = vscode.window.createWebviewPanel(
+			'cloudsnip.login', // Identifies the type of the webview. Used internally
+			'Login', // Title of the panel displayed to the user
+			vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+			{} // Webview options. More on these later.
+		  );
 	});
 
 	context.subscriptions.push(disposable);
