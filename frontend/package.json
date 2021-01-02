@@ -1,7 +1,7 @@
 {
-	"name": "cloudsnip",
-	"displayName": "CloudSnip",
-	"description": "Visual Studio Code extension for storing and sharing code snippets, all in the Cloud.",
+	"name": "vsfriends",
+	"displayName": "VSFriends",
+	"description": "A friend finder and adder for VSCode",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.52.0"
@@ -10,34 +10,13 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:cloudsnip.helloWorld"
+		"onCommand:vsfriends.helloWorld"
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "cloudsnip",
-					"title": "CloudSnip",
-					"icon": "./lib/clipboard.svg"
-				}
-			]
-		},
-		"views": {
-			"cloudsnip": [
-				{
-					"id": "cloudsnip.auth",
-					"name": "Login"
-				},
-				{
-					"id": "cloudsnip.snips",
-					"name": "Cloud Snippets"
-				}
-			]
-		},
 		"commands": [
 			{
-				"command": "cloudsnip.helloWorld",
+				"command": "vsfriends.helloWorld",
 				"title": "Hello World"
 			}
 		]
