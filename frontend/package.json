@@ -10,21 +10,33 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vsfriends.helloWorld"
+		"onCommand:vsfriends.helloWorld",
+		"onUri",
+		"onView:profile",
+		"onView:friends"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
+<<<<<<< Updated upstream
 				{
 					"id": "vsfriends",
 					"title": "VSFriends",
 					"icon": "./user-friends.svg"
 				}
+=======
+			  {
+				"id": "vsfriends",
+				"title": "VSFriends",
+				"icon": ".//lib//img//organization.svg"
+			  }
+>>>>>>> Stashed changes
 			]
 		},
 		"views": {
 			"vsfriends": [
+<<<<<<< Updated upstream
 				{
 					"id": "profile",
 					"name": "Profile",
@@ -35,6 +47,18 @@
 					"name": "Friends",
 					"contextualTitle": "Friends"
 				}
+=======
+			  {
+				"id": "vsfriends.profile",
+				"name": "Profile",
+				"contextualTitle": "Profile"
+			  },
+			  {
+				"id": "vsfriends.friends",
+				"name": "Friends",
+				"contextualTitle": "Friends"
+			  }
+>>>>>>> Stashed changes
 			]
 		},
 		"commands": [
@@ -45,8 +69,6 @@
 		]
 	},
 	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
 		"test": "node ./test/runTest.js"
 	},
 	"devDependencies": {
