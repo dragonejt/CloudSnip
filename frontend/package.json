@@ -16,27 +16,27 @@
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
-			  {
-				"id": "vsfriends",
-				"title": "VSFriends",
-				"icon": "./user-friends.svg"
-			  }
+				{
+					"id": "vsfriends",
+					"title": "VSFriends",
+					"icon": "./user-friends.svg"
+				}
 			]
-		  },
+		},
 		"views": {
 			"vsfriends": [
-			  {
-				"id": "profile",
-				"name": "Profile",
-				"contextualTitle": "Profile"
-			  },
-			  {
-				"id": "friends",
-				"name": "Friends",
-				"contextualTitle": "Friends"
-			  }
+				{
+					"id": "profile",
+					"name": "Profile",
+					"contextualTitle": "Profile"
+				},
+				{
+					"id": "friends",
+					"name": "Friends",
+					"contextualTitle": "Friends"
+				}
 			]
-		  },
+		},
 		"commands": [
 			{
 				"command": "vsfriends.helloWorld",
