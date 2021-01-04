@@ -1,7 +1,7 @@
 {
-	"name": "cloudsnip",
-	"displayName": "CloudSnip",
-	"description": "Visual Studio Code extension for storing and sharing code snippets, all in the Cloud.",
+	"name": "vsfriends",
+	"displayName": "VSFriends",
+	"description": "A friend finder and adder for VSCode",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.52.0"
@@ -10,34 +10,36 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:cloudsnip.helloWorld"
+		"onCommand:vsfriends.helloWorld"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "cloudsnip",
-					"title": "CloudSnip",
-					"icon": "./lib/clipboard.svg"
+					"id": "vsfriends",
+					"title": "VSFriends",
+					"icon": "./user-friends.svg"
 				}
 			]
 		},
 		"views": {
-			"cloudsnip": [
+			"vsfriends": [
 				{
-					"id": "cloudsnip.auth",
-					"name": "Login"
+					"id": "profile",
+					"name": "Profile",
+					"contextualTitle": "Profile"
 				},
 				{
-					"id": "cloudsnip.snips",
-					"name": "Cloud Snippets"
+					"id": "friends",
+					"name": "Friends",
+					"contextualTitle": "Friends"
 				}
 			]
 		},
 		"commands": [
 			{
-				"command": "cloudsnip.helloWorld",
+				"command": "vsfriends.helloWorld",
 				"title": "Hello World"
 			}
 		]
@@ -48,14 +50,14 @@
 		"test": "node ./test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.52.0",
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
-		"eslint": "^7.15.0",
+		"@types/vscode": "^1.52.0",
 		"glob": "^7.1.6",
 		"mocha": "^8.1.3",
 		"typescript": "^4.1.2",
 		"vscode-test": "^1.4.1"
-	}
+	},
+	"dependencies": {}
 }
