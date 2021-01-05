@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+const dotenv = require('dotenv').config({ path: "C:\\Users\\ejtung\\Documents\\VSFriends\\frontend\\.env" });
 const vscode = require('vscode');
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -12,38 +14,53 @@ function activate(context) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	const authProvider = new AuthViewProvider(context.extensionUri);
+	if (dotenv.error) {
+		throw dotenv.error
+	  }
+	console.log(dotenv.parsed)
+	
+	console.log('Congratulations, your extension "vsfriends" is now active!');
+	let isLoggedIn = false;
+	let JSONWEBTOKEN = null;
 
-	context.subscriptions.push(
-		vscode.window.registerWebviewViewProvider("vsfriends.profile", authProvider));
 
-	vscode.window.registerUriHandler({
-		handleUri(uri) {
-			vscode.window.showInformationMessage(uri.path + uri.query);
-		}
-	})
-
-	vscode.window.showInformationMessage("Hello");
-
+	if (JSONWEBTOKEN != null) {
+		isLoggedIn = true;
+	}
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vsfriends.helloWorld', function () {
+	let login = vscode.commands.registerCommand('vsfriends.login', () => {
 		// The code you place here will be executed every time your command is executed
-		vscode.window.showInformationMessage(context.extensionUri.toString());
-		vscode.window.showInformationMessage("Hello");
-		// Display a message box to the user
-		
+		if (isLoggedIn === false) {
+			vscode.window.showInformationMessage("Redirecting to GitHub Authentication...");
+			vscode.env.openExternal(vscode.Uri.parse(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`));
+		}
+		else {
+			vscode.window.showWarningMessage('You are already logged in! To sign in again, please sign out first.');
+		}
+	});
+	let logout = vscode.commands.registerCommand('vsfriends.logout', () => {
+		// The code you place here will be executed every time your command is executed
+		if (isLoggedIn === false) {
+			vscode.window.showWarningMessage("You have not signed in yet! Please sign in before you can sign out.");
+		}
+		else {
+			JSONWEBTOKEN = null;
+			isLoggedIn = false;
+			vscode.window.showInformationMessage("You have signed out. Thank you for using VSFriends.");
+		}
+
 	});
 	
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(login);
 }
 exports.activate = activate;
 
 // this method is called when your extension is deactivated
 function deactivate() {
-	vscode.window.showInformationMessage("Hello");
+	console.log("deactivating");
 }
 
 module.exports = {

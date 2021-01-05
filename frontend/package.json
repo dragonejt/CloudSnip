@@ -10,61 +10,39 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vsfriends.helloWorld",
+		"onCommand:vsfriends.login",
+		"onCommand:vsfriends.logout",
 		"onUri",
-		"onView:profile",
 		"onView:friends"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
-<<<<<<< Updated upstream
-				{
-					"id": "vsfriends",
-					"title": "VSFriends",
-					"icon": "./user-friends.svg"
-				}
-=======
 			  {
 				"id": "vsfriends",
 				"title": "VSFriends",
 				"icon": ".//lib//img//organization.svg"
 			  }
->>>>>>> Stashed changes
 			]
 		},
 		"views": {
 			"vsfriends": [
-<<<<<<< Updated upstream
 				{
-					"id": "profile",
-					"name": "Profile",
-					"contextualTitle": "Profile"
-				},
-				{
-					"id": "friends",
-					"name": "Friends",
-					"contextualTitle": "Friends"
+					"id": "vsfriends.friends",
+					"name": "",
+					"contextualTitle": ""
 				}
-=======
-			  {
-				"id": "vsfriends.profile",
-				"name": "Profile",
-				"contextualTitle": "Profile"
-			  },
-			  {
-				"id": "vsfriends.friends",
-				"name": "Friends",
-				"contextualTitle": "Friends"
-			  }
->>>>>>> Stashed changes
 			]
 		},
 		"commands": [
 			{
-				"command": "vsfriends.helloWorld",
-				"title": "Hello World"
+				"command": "vsfriends.login",
+				"title": "VSFriends: Sign In with GitHub"
+			},
+			{
+				"command": "vsfriends.logout",
+				"title": "VSFriends: Sign Out"
 			}
 		]
 	},
@@ -81,5 +59,7 @@
 		"typescript": "^4.1.2",
 		"vscode-test": "^1.4.1"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"dotenv": "^8.2.0"
+	}
 }
