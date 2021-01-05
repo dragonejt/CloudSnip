@@ -50,7 +50,9 @@ function activate(context) {
 			isLoggedIn = false;
 			vscode.window.showInformationMessage("You have signed out. Thank you for using VSFriends.");
 		}
+
 	});
+	
 
 	context.subscriptions.push(login);
 }
@@ -64,4 +66,47 @@ function deactivate() {
 module.exports = {
 	activate,
 	deactivate
+}
+
+
+export class AuthViewProvider {
+
+	viewType = 'vsfriends.profile';
+
+	_view;
+
+	_extensionUri;
+
+	constructor(_extensionUri) {
+		this._extensionUri = _extensionUri;
+	 }
+
+	resolveWebviewView(webviewView) {
+		this._view = webviewView;
+		webviewView.webview.options = {
+			// Allow scripts in the webview
+			enableScripts: true,
+
+			localResourceRoots: [
+				this._extensionUri
+			]
+		};
+
+		webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
+
+	}
+	 _getHtmlForWebview(webview) {
+		
+		return `<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>VSFriends</title>
+		</head>
+		<body>
+			<button style="color: blue">Login with GitHub</button>
+		</body>
+		</html>`;
+		  }
 }
