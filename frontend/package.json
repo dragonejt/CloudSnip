@@ -19,11 +19,11 @@
 	"contributes": {
 		"viewsContainers": {
 			"activitybar": [
-			  {
-				"id": "vsfriends",
-				"title": "VSFriends",
-				"icon": ".//lib//img//organization.svg"
-			  }
+				{
+					"id": "vsfriends",
+					"title": "VSFriends",
+					"icon": ".//lib//img//organization.svg"
+				}
 			]
 		},
 		"views": {
