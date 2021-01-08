@@ -10,19 +10,22 @@ const vscode = require('vscode');
 /**
  * @param {vscode.ExtensionContext} context
  */
+let isLoggedIn;
+let JSONWEBTOKEN;
+
 function activate(context) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
 	if (dotenv.error) {
 		throw dotenv.error
-	  }
+	}
 	console.log(dotenv.parsed)
-	
-	console.log('Congratulations, your extension "vsfriends" is now active!');
-	let isLoggedIn = false;
-	let JSONWEBTOKEN = null;
 
+	console.log('Congratulations, your extension "vsfriends" is now active!');
+	isLoggedIn = false;
+	JSONWEBTOKEN = null;
+	JSONWEBTOKEN = context.globalState.get("JSON_WEB_TOKEN", null);
 
 	if (JSONWEBTOKEN != null) {
 		isLoggedIn = true;
@@ -47,14 +50,39 @@ function activate(context) {
 		}
 		else {
 			JSONWEBTOKEN = null;
+			context.globalState.update("JSON_WEB_TOKEN", null);
 			isLoggedIn = false;
 			vscode.window.showInformationMessage("You have signed out. Thank you for using VSFriends.");
+			//after this should come the instruction (function) to refresh the sidebar webview so that VSCode retrieves the information. For Issue #5.
 		}
 
 	});
+
+	let authUri = vscode.window.registerUriHandler({
+		handleUri(uri) {
+			if (uri.path === "/auth") {
+				vscode.window.showInformationMessage(`Authentication Succeeded. Your JSON Web Token is: ${uri.query}`);
+				JSONWEBTOKEN = uri.query;
+				context.globalState.update("JSON_WEB_TOKEN", JSONWEBTOKEN);
+				//after this should come the instruction (function) to refresh the sidebar webview so that VSCode retrieves the information. For Issue #5.
+			}
+			else {
+				vscode.window.showInformationMessage("Invalid URI for VSFriends. Did you perhaps mistype something?")
+			}
+		}
+	});
 	
+	let friendsBar = vscode.window.registerWebviewViewProvider("vsfriends.friends", {
+		resolveWebviewView(webviewView, context, token) {
+
+		}
+	})
+
 
 	context.subscriptions.push(login);
+	context.subscriptions.push(logout);
+	context.subscriptions.push(authUri);
+	context.subscriptions.push(friendsBar);
 }
 exports.activate = activate;
 
@@ -66,47 +94,4 @@ function deactivate() {
 module.exports = {
 	activate,
 	deactivate
-}
-
-
-export class AuthViewProvider {
-
-	viewType = 'vsfriends.profile';
-
-	_view;
-
-	_extensionUri;
-
-	constructor(_extensionUri) {
-		this._extensionUri = _extensionUri;
-	 }
-
-	resolveWebviewView(webviewView) {
-		this._view = webviewView;
-		webviewView.webview.options = {
-			// Allow scripts in the webview
-			enableScripts: true,
-
-			localResourceRoots: [
-				this._extensionUri
-			]
-		};
-
-		webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
-
-	}
-	 _getHtmlForWebview(webview) {
-		
-		return `<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>VSFriends</title>
-		</head>
-		<body>
-			<button style="color: blue">Login with GitHub</button>
-		</body>
-		</html>`;
-		  }
 }
