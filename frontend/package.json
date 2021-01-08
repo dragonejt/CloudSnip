@@ -13,7 +13,7 @@
 		"onCommand:vsfriends.login",
 		"onCommand:vsfriends.logout",
 		"onUri",
-		"onView:friends"
+		"onView:vsfriends.friends"
 	],
 	"main": "./extension.js",
 	"contributes": {
@@ -22,7 +22,7 @@
 			  {
 				"id": "vsfriends",
 				"title": "VSFriends",
-				"icon": ".//lib//img//organization.svg"
+				"icon": ".\\lib\\img\\organization.svg"
 			  }
 			]
 		},
@@ -35,6 +35,12 @@
 				}
 			]
 		},
+		"viewsWelcome": [
+			{
+			  "view": "vsfriends.friends",
+			  "contents": "You must be signed in with GitHub in order to use VSFriends.\n[Sign In with GitHub](command:vsfriends.login)\n If you wish to contribute to this project, please visit our [repository](https://github.com/dragonejt/VSFriends)."
+			}
+		  ],
 		"commands": [
 			{
 				"command": "vsfriends.login",
