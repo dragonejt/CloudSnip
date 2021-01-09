@@ -27,7 +27,7 @@
 			]
 		},
 		"views": {
-			"vsfriends": [
+			"vsfriends" : [
 				{
 					"id": "vsfriends.friends",
 					"name": "",
